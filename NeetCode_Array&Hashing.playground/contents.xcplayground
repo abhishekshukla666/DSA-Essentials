@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' buildActiveScheme='true' importAppTypes='true'>
+    <pages>
+        <page name='TopKFrequentElement'/>
+        <page name='ProductOfArrayExceptSelf'/>
+        <page name='ValidSudoku'/>
+        <page name='LongestCommonPrefix'/>
+        <page name='PascalsTraingle'/>
+        <page name='WordPatterns'/>
+        <page name='Encode&amp;DecodeString'/>
+        <page name='Sort0and1'/>
+    </pages>
+</playground>
