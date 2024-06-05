@@ -4,5 +4,8 @@
         <page name='SearchInsertPosition'/>
         <page name='Valid Perfect Square'/>
         <page name='Search 2D Matrix'/>
+        <page name='Find Peak Element'/>
+        <page name='Median of two sorted array'/>
+        <page name='H-Index'/>
     </pages>
 </playground>

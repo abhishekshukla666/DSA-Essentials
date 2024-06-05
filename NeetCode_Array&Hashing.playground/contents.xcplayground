@@ -8,6 +8,23 @@
         <page name='PascalsTraingle'/>
         <page name='WordPatterns'/>
         <page name='Encode&amp;DecodeString'/>
+        <page name='LeastBrick'/>
         <page name='Sort0and1'/>
+        <page name='FindAllNumbersDisappeardInArray'/>
+        <page name='SubArraySumEqualK'/>
+        <page name='MaximumSubArraySum'/>
+        <page name='PrimeNumber'/>
+        <page name='RearrageArrayElementsBySign'/>
+        <page name='Sum3'/>
+        <page name='Sum4'/>
+        <page name='GridGame'/>
+        <page name='FindAllAnagramsInString'/>
+        <page name='SquareRoot'/>
+        <page name='MaxSubarraySumCircular'/>
+        <page name='RotateArrayByK'/>
+        <page name='Powerof3'/>
+        <page name='TrappingRainWater'/>
+        <page name='HappyNumber'/>
+        <page name='IntegerToRoman'/>
     </pages>
 </playground>

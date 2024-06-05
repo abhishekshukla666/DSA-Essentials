@@ -9,6 +9,7 @@ func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
     while left <= right {
         let mid = (left + right) / 2
         let element = matrix[mid / m][mid % m]
+        debugPrint(element, terminator: " ")
         if element < target {
             left = mid + 1
         } else if element > target {
