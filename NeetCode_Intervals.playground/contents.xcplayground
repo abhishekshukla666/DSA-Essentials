@@ -6,5 +6,6 @@
         <page name='Non-Overlapping Intervals'/>
         <page name='MeetingRoom1'/>
         <page name='MeetingRoom2'/>
+        <page name='MinNumOfArrowToBurstBalloons'/>
     </pages>
 </playground>
