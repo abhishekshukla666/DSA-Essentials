@@ -2,7 +2,15 @@
 
 import XCTest
 
-public class Node {
+public class Node: Hashable {
+    public static func == (lhs: Node, rhs: Node) -> Bool {
+        lhs.val == rhs.val
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(val)
+    }
+    
     var val: Int
     var next: Node?
     var random: Node?
@@ -33,17 +41,17 @@ class Solution {
     }
 }
 
-class SolutionTests: XCTestCase {
-    var s = Solution()
-    func testIsMonotonicIncreasing() {
-        XCTAssertTrue(s.isMonotonic([1,2,2,3]))
-    }
-    func testIsMonotonicDecreasing() {
-        XCTAssertTrue(s.isMonotonic([1,0,0,-1]))
-    }
-    func testIsMonotonicIncreasing2() {
-        XCTAssertTrue(s.isMonotonic([1, 1, 2]))
-    }
-}
+//class SolutionTests: XCTestCase {
+//    var s = Solution()
+//    func testIsMonotonicIncreasing() {
+//        XCTAssertTrue(s.isMonotonic([1,2,2,3]))
+//    }
+//    func testIsMonotonicDecreasing() {
+//        XCTAssertTrue(s.isMonotonic([1,0,0,-1]))
+//    }
+//    func testIsMonotonicIncreasing2() {
+//        XCTAssertTrue(s.isMonotonic([1, 1, 2]))
+//    }
+//}
 
-SolutionTests.defaultTestSuite.run()
+//SolutionTests.defaultTestSuite.run()

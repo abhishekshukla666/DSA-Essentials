@@ -10,7 +10,7 @@ func lcs(_ text1: String, _ text2: String) -> Int {
     let s2 = Array(text2)
     
     func helper(_ m: Int, _ n: Int, _ count: Int) -> Int {
-        if m == 0 || n == 0 { return 0 }
+        if m == 0 || n == 0 { return count }
         
         if s1[m - 1] == s2[n - 1] {
             return helper(m - 1, n - 1, count + 1)

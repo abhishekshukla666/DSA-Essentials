@@ -3,5 +3,6 @@
     <pages>
         <page name='Heap'/>
         <page name='Untitled Page'/>
+        <page name='MinHeap'/>
     </pages>
 </playground>

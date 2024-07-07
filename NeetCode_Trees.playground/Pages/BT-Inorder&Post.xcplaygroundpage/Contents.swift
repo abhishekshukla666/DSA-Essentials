@@ -46,8 +46,15 @@ func buildTree(_ inorder: [Int], _ postorder: [Int]) -> TreeNode? {
     
     print("\n")
     
-    root.right = buildTree(Array(inorder[midIndex+1..<inorder.count]), Array(postorder[midIndex..<postorder.count - 1]))
-    root.left = buildTree(Array(inorder[0..<midIndex]), Array(postorder[0..<midIndex]))
+    root.right = buildTree(
+        Array(inorder[midIndex+1..<inorder.count]),
+        Array(postorder[midIndex..<postorder.count - 1])
+    )
+    
+    root.left = buildTree(
+        Array(inorder[0..<midIndex]),
+        Array(postorder[0..<midIndex])
+    )
     
     return root
 }

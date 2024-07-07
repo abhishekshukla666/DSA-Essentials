@@ -22,4 +22,19 @@ class Solution {
         }
         return prev
     }
+    
+    func reverseList_Recursive(_ head: ListNode?) -> ListNode? {
+        var prev: ListNode?
+        
+        func helper(_ curr: ListNode?) -> ListNode? {
+            if curr == nil { return nil }
+            let next = curr?.next
+            curr?.next = prev
+            prev = curr
+            helper(next)
+            return prev
+        }
+        
+        return helper(head)
+    }
 }

@@ -4,5 +4,6 @@
         <page name='ReverseLinkList'/>
         <page name='Reorder List'/>
         <page name='CopyListWithRandomPointer'/>
+        <page name='RemoveNthNodeFromEnd'/>
     </pages>
 </playground>

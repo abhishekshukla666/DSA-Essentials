@@ -3,5 +3,6 @@
     <pages>
         <page name='LCSubSequence'/>
         <page name='LCSubstring'/>
+        <page name='01Knapsack'/>
     </pages>
 </playground>
