@@ -94,4 +94,38 @@ extension Heap {
     }
 }
 
-var heap = Heap(elements: [3, 2, 8, 5, 0], priorityFunction: >)
+var maxHeap = Heap(elements: [Int](), priorityFunction: >)
+maxHeap.enqueue(3)
+maxHeap.enqueue(2)
+maxHeap.enqueue(5)
+maxHeap.enqueue(4)
+maxHeap.enqueue(1)
+maxHeap.enqueue(7)
+maxHeap.enqueue(6)
+maxHeap.peek()
+print(maxHeap.elements)
+
+var maxHeapSort = [Any]()
+maxHeap.elements.forEach { _ in
+    maxHeapSort.append(maxHeap.dequeue() ?? -1)
+}
+print(maxHeapSort)
+
+print("\n")
+
+var minHeap = Heap(elements: [Int](), priorityFunction: <)
+minHeap.enqueue(3)
+minHeap.enqueue(2)
+minHeap.enqueue(5)
+minHeap.enqueue(4)
+minHeap.enqueue(1)
+minHeap.enqueue(7)
+minHeap.enqueue(6)
+minHeap.peek()
+print(minHeap.elements)
+
+var minHeapSort = [Any]()
+minHeap.elements.forEach { _ in
+    minHeapSort.append(minHeap.dequeue() ?? -1)
+}
+print(minHeapSort)

@@ -4,5 +4,6 @@
         <page name='LCSubSequence'/>
         <page name='LCSubstring'/>
         <page name='01Knapsack'/>
+        <page name='WordBreak'/>
     </pages>
 </playground>

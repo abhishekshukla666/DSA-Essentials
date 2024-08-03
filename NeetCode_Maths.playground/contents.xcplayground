@@ -3,5 +3,7 @@
     <pages>
         <page name='HappyNumber'/>
         <page name='RomanToInt'/>
+        <page name='Formation'/>
+        <page name='BasicCalculatorII'/>
     </pages>
 </playground>

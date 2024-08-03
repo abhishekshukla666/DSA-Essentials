@@ -47,7 +47,7 @@ struct MinHeap {
         if items.count != 0 {
             return items[0]
         } else {
-            fatalError()
+            fatalError("No Elements Found!!")
         }
     }
 
@@ -112,7 +112,7 @@ class KthLargest {
     
     func add(_ val: Int) -> Int {
         if minHeap.size >= capacity {
-            if val > minHeap.peek() {
+            if val < minHeap.peek() {
                 minHeap.poll()
                 minHeap.add(val)
             }
@@ -125,6 +125,10 @@ class KthLargest {
 
 /**
  * Your KthLargest object will be instantiated and called as such:
- * let obj = KthLargest(k, nums)
- * let ret_1: Int = obj.add(val)
- */
+*/
+let nums = [4, 3, 1, 5, 2]; let k = 0
+let obj = KthLargest(k, nums)
+obj.minHeap.peek()
+
+
+
