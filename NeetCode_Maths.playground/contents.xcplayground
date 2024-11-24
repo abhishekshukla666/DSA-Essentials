@@ -5,5 +5,6 @@
         <page name='RomanToInt'/>
         <page name='Formation'/>
         <page name='BasicCalculatorII'/>
+        <page name='ExcelSheetColumnTitle'/>
     </pages>
 </playground>

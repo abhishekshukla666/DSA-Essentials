@@ -38,3 +38,4 @@ class SolutionTest: XCTestCase {
     }
 }
 
+SolutionTest.defaultTestSuite.run()
