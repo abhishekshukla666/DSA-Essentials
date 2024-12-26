@@ -43,7 +43,8 @@ func insert(_ intervals: [[Int]], _ newInterval: [Int]) -> [[Int]] {
 }
 
 
-let intervals = [[1,3],[6,9]]; let newInterval = [2,5]
+//let intervals = [[1,3],[6,9]]; let newInterval = [2,5]
+let intervals = [[1,2],[3,5],[12,16]]; let newInterval = [4,8]
 debugPrint("RESULT: ",
 insert(intervals, newInterval)
 )

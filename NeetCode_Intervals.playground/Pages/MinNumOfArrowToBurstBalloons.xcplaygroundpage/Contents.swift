@@ -53,17 +53,17 @@ func findMinArrowShots(_ points: [[Int]]) -> Int {
     }
 
 func findMinArrowShots_2(_ points: [[Int]]) -> Int {
-
-        let points = points.sorted { $0[1] < $1[1] }
-        var end = Int.min
-        var count = 0
-
-        for point in points {
-            if end < point[0] {
-                count += 1
-                end = point[1]
-            }
+    
+    let points = points.sorted { $0[1] < $1[1] }
+    var end = Int.min
+    var count = 0
+    
+    for point in points {
+        if end < point[0] {
+            count += 1
+            end = point[1]
         }
-
-        return count
     }
+    
+    return count
+}

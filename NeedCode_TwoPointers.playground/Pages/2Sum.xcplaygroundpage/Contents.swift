@@ -33,15 +33,34 @@ class Solution {
     func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
         var map = [Int: Int]()
 
-        for (index, num) in numbers.enumerated() {
+       for (index, num) in numbers.enumerated() {
             let diff = target - num
             if let diffIndex = map[diff] {
-                return [diffIndex, index]
+                return [diffIndex + 1, index + 1]
             } else {
                 map[num] = index
             }
         }
         
+        return []
+    }
+}
+
+class Solution2 {
+    func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
+        var left = 0
+        var right = numbers.count - 1
+
+        while left < right {
+            let diff = target - numbers[left]
+            if diff < numbers[right] {
+                right -= 1
+            } else if diff > numbers[right] {
+                left += 1
+            } else {
+                return [left + 1, right + 1]
+            }
+        }
         return []
     }
 }

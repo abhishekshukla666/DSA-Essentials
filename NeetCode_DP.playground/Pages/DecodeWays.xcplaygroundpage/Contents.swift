@@ -65,42 +65,74 @@
  s contains only digits and may contain leading zero(s).
  */
 
-import Foundation
 import XCTest
 
 class Solution {
-    func numDecodings(_ s: String) -> Int {
+    func numDecodings_TopDown_Recursive(_ s: String) -> Int {
+        guard s.count > 1 else { return s == "0" ? 0 : 1}
+        var dp = [Int: Int]()
+        dp[s.count] = 1
+        var s = Array(s)
+
+        func dfs(_ i: Int) -> Int{
+            if let item = dp[i]{
+                return item
+            }
+            if s[i] == "0"{
+                return 0
+            }
+
+            var res = dfs(i + 1)
+            var limit = "0123456"
+            if (i + 1 < s.count) &&
+               (s[i] == "1" || (s[i] == "2" && limit.contains(s[i + 1]))){
+                res += dfs(i + 2)
+               }
+            dp[i, default: 0] = res
+            return res
+        }
+        return dfs(0)
+    }
+    
+    func numDecodings_BottomUp_Loop(_ s: String) -> Int {
+        let n = s.count
+        guard n > 1 else { return s == "0" ? 0: 1 }
         let s = Array(s)
-        func helper(_ i: Int) -> Int {
-            print(i)
-            if i >= s.count { return 1 }
-            if s[i] == "0" { return 0 }
-            
-            var result = 0
-            result += helper(i + 1)
-            
-            if i + 1 < s.count {
-                let number = Int("\(s[i])\(s[i + 1])")!
-                if number > 0 && number <= 26 {
-                    result += helper(i + 2)
+        let limit = "0123456"
+        var dp = Array(repeating: 0, count: n + 1)
+        dp[n] = 1
+        for i in stride(from: n - 1, to: -1, by: -1) {
+            if s[i] == "0" {
+                dp[i] = 0
+            } else {
+                dp[i] = dp[i + 1]
+                if (i + 1 < n) {
+                    if s[i] == "1" || (s[i] == "2" && limit.contains(s[i + 1])) {
+                        dp[i] += dp[i + 2]
+                    }
                 }
             }
-            return result
         }
-        return helper(0)
+        
+        return dp[0]
     }
 }
 
-let s = Solution()
-s.numDecodings("12")
-
-//class SolutionTests: XCTestCase {
-//    var s = Solution()
-//    func decodingWays1() {
-//        XCTAssertEqual(s.numDecodings("12"), 2)
-//        XCTAssertEqual(s.numDecodings("06"), 0)
-//        XCTAssertEqual(s.numDecodings("226"), 3)
+class SolutionTests: XCTestCase {
+    var s = Solution()
+//    func testExample() {
+//        XCTAssertEqual(s.numDecodings_TopDown_Recursive("12"), 2)
+//        XCTAssertEqual(s.numDecodings_TopDown_Recursive("06"), 0)
+//        XCTAssertEqual(s.numDecodings_TopDown_Recursive("226"), 3)
+//        XCTAssertEqual(s.numDecodings_TopDown_Recursive("111111111111111111111111111111111111111111111"), 1836311903)
 //    }
-//}
-//
-//SolutionTests.defaultTestSuite.run()
+    
+    func testExample() {
+        XCTAssertEqual(s.numDecodings_BottomUp_Loop("12"), 2)
+        XCTAssertEqual(s.numDecodings_BottomUp_Loop("06"), 0)
+        XCTAssertEqual(s.numDecodings_BottomUp_Loop("226"), 3)
+        XCTAssertEqual(s.numDecodings_BottomUp_Loop("111111111111111111111111111111111111111111111"), 1836311903)
+    }
+}
+
+SolutionTests.defaultTestSuite.run()
