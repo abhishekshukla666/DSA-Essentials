@@ -22,7 +22,6 @@
  Output: false
  */
 
-import Foundation
 import XCTest
 
 class Solution {
@@ -47,23 +46,23 @@ class Solution {
     }
 }
 
-//class SolutionTests: XCTestCase {
+class SolutionTests: XCTestCase {
     var s = Solution()
-//    func testWordBreak1() {
-//        XCTAssertTrue(s.wordBreak("leetcode", ["leet", "code"]))
-//    }
-//    func testWordBreak2() {
-//        XCTAssertTrue(s.wordBreak("applepenapple", ["apple","pen"]))
-//    }
-//    func testWordBreak3() {
-//        XCTAssertFalse(s.wordBreak("catsandog", ["cats","dog","sand","and","cat"]))
-//    }
-//}
+    func testWordBreak1() {
+        XCTAssertTrue(s.wordBreak("leetcode", ["leet", "code"]))
+    }
+    func testWordBreak2() {
+        XCTAssertTrue(s.wordBreak("applepenapple", ["apple","pen"]))
+    }
+    func testWordBreak3() {
+        XCTAssertFalse(s.wordBreak("catsandog", ["cats","dog","sand","and","cat"]))
+    }
+}
 
-//SolutionTests.defaultTestSuite.run()
+SolutionTests.defaultTestSuite.run()
 
 //s.wordBreak("leetcode", ["neet", "code", "leet"])
-s.wordBreak("catsandog", ["cats","dog","sand","and","cat"])
+//s.wordBreak("catsandog", ["cats","dog","sand","and","cat"])
 
 //let s = "abcdefgh"
 //s.hasPrefix("abc")
