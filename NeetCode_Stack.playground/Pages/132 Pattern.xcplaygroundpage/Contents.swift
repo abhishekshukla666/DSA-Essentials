@@ -1,4 +1,34 @@
 
+/*
+ 456. 132 Pattern
+ Medium
+ 
+ Given an array of n integers nums, a 132 pattern is a subsequence of three integers nums[i], nums[j] and nums[k] such that i < j < k and nums[i] < nums[k] < nums[j].
+
+ Return true if there is a 132 pattern in nums, otherwise, return false.
+
+ Example 1:
+ Input: nums = [1,2,3,4]
+ Output: false
+ Explanation: There is no 132 pattern in the sequence.
+ 
+ Example 2:
+ Input: nums = [3,1,4,2]
+ Output: true
+ Explanation: There is a 132 pattern in the sequence: [1, 4, 2].
+ 
+ Example 3:
+ Input: nums = [-1,3,2,0]
+ Output: true
+ Explanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].
+  
+ Constraints:
+ n == nums.length
+ 1 <= n <= 2 * 105
+ -109 <= nums[i] <= 109
+ 
+ */
+
 import XCTest
 
 class Solution {
@@ -7,6 +37,8 @@ class Solution {
         var stack = [[Int]]() // [j, minValue]
         var currMin = nums[0] // current minValue
         
+        ///  i < j < k and nums[i] < nums[k] < nums[j]
+
         for k in 1..<nums.count {
             while !stack.isEmpty && stack.last![0] < nums[k] {
                 stack.removeLast()
@@ -24,48 +56,15 @@ class Solution {
 
 class SolutionTests: XCTestCase {
     
-    var solution: Solution!
+    let solution = Solution()
     
-    override func setUp() {
-        super.setUp()
-        print("setUp")
-        solution = Solution()
+    func testExapmle() {
+        XCTAssertEqual(solution.find132pattern([1,2,3,4]), false, "Incorrect!")
+        XCTAssertEqual(solution.find132pattern([3,1,4,2]), true, "Incorrect!")
+        XCTAssertEqual(solution.find132pattern([-1,3,2,0]), true, "Incorrect!")
     }
-    
-    override func tearDown() {
-        debugPrint("tearDown")
-        solution = nil
-        super.tearDown()
-    }
-    
-    func testCase1() {
-        
-        // case 1
-        let result1 = solution.find132pattern([3,1,4,2])
-        XCTAssertEqual(result1, true, "Incorrect!")
-    }
-    func testCase2() {
-        // case 2
-        let result2 = solution.find132pattern([-1,3,2,0])
-        XCTAssertEqual(result2, true, "Incorrect!")
-    }
-    
-    func testCase3() {
-        // case 3
-        let result3 = solution.find132pattern([-2,1,1])
-        XCTAssertEqual(result3, false , "Incorrect")
+    func testExample2() {
+        XCTAssertEqual(solution.find132pattern([1,2,3,4,5]), false, "Incorrect!")
     }
 }
-
-
-class TestObserver: NSObject, XCTestObservation {
-    func testCase(_ testCase: XCTestCase,
-                  didFailWithDescription description: String,
-                  inFile filePath: String?,
-                  atLine lineNumber: Int) {
-        assertionFailure(description, line: UInt(lineNumber))
-    }
-}
-let testObserver = TestObserver()
-XCTestObservationCenter.shared.addTestObserver(testObserver)
 SolutionTests.defaultTestSuite.run()

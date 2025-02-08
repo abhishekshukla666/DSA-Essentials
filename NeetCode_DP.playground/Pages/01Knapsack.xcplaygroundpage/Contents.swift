@@ -30,8 +30,6 @@ func maxWeight_R(_ weigths: [Int], _ prices: [Int], _ w: Int) -> Int {
 
 /// Recursive + Memoization
 func maxWeight_RM(_ weigths: [Int], _ prices: [Int], _ w: Int) -> Int {
-    
-
     var t = Array(repeating: Array(repeating: 0, count: prices.count + 1), count: w + 1)
     
     func helper(_ w: Int, _ n: Int) -> Int {
@@ -50,7 +48,6 @@ func maxWeight_RM(_ weigths: [Int], _ prices: [Int], _ w: Int) -> Int {
         return t[w][n]
     }
     
-    
     let value = helper(w, weights.count)
     print(t)
     return value
@@ -59,10 +56,8 @@ func maxWeight_RM(_ weigths: [Int], _ prices: [Int], _ w: Int) -> Int {
 /// Top-Down
 func maxWeight_DP(_ weigths: [Int], _ prices: [Int], _ w: Int) -> Int {
     
-
     var n = prices.count
     var t = Array(repeating: Array(repeating: 0, count: n + 1), count: w + 1)
-    
     
     for i in 0...w {
         for j in 0...n {

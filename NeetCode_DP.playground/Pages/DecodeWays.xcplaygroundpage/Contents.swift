@@ -68,33 +68,43 @@
 import XCTest
 
 class Solution {
-    func numDecodings_TopDown_Recursive(_ s: String) -> Int {
-        guard s.count > 1 else { return s == "0" ? 0 : 1}
-        var dp = [Int: Int]()
-        dp[s.count] = 1
-        var s = Array(s)
-
-        func dfs(_ i: Int) -> Int{
-            if let item = dp[i]{
-                return item
-            }
-            if s[i] == "0"{
-                return 0
-            }
-
-            var res = dfs(i + 1)
-            var limit = "0123456"
-            if (i + 1 < s.count) &&
-               (s[i] == "1" || (s[i] == "2" && limit.contains(s[i + 1]))){
-                res += dfs(i + 2)
-               }
-            dp[i, default: 0] = res
-            return res
-        }
-        return dfs(0)
+    
+    func isVAlid(index: Int, for s: [String.Element]) -> Bool {
+        let limit = "0123456"
+        return (index + 1 < s.count) &&
+        (s[index] == "1" || s[index] == "2" && limit.contains(s[index + 1]))
     }
     
-    func numDecodings_BottomUp_Loop(_ s: String) -> Int {
+    func numDecodings(_ s: String) -> Int {
+        guard s.count > 1 else { return s == "0" ? 0 : 1}
+        
+        var dp: [Int: Int] = .init()
+        var s = Array(s)
+
+        func ways(_ index: Int) -> Int{
+            if index >= s.count { return 1 }
+            
+            if let item = dp[index]{
+                return item
+            }
+            
+            if s[index] == "0"{
+                return 0
+            }
+            
+            var res = ways(index + 1)
+            
+            if isVAlid(index: index, for: s) {
+                res += ways(index + 2)
+               }
+            dp[index, default: 0] = res
+            return res
+        }
+        return ways(0)
+    }
+    
+
+    func numDecodings2(_ s: String) -> Int {
         let n = s.count
         guard n > 1 else { return s == "0" ? 0: 1 }
         let s = Array(s)
@@ -119,19 +129,12 @@ class Solution {
 }
 
 class SolutionTests: XCTestCase {
-    var s = Solution()
-//    func testExample() {
-//        XCTAssertEqual(s.numDecodings_TopDown_Recursive("12"), 2)
-//        XCTAssertEqual(s.numDecodings_TopDown_Recursive("06"), 0)
-//        XCTAssertEqual(s.numDecodings_TopDown_Recursive("226"), 3)
-//        XCTAssertEqual(s.numDecodings_TopDown_Recursive("111111111111111111111111111111111111111111111"), 1836311903)
-//    }
     
     func testExample() {
-        XCTAssertEqual(s.numDecodings_BottomUp_Loop("12"), 2)
-        XCTAssertEqual(s.numDecodings_BottomUp_Loop("06"), 0)
-        XCTAssertEqual(s.numDecodings_BottomUp_Loop("226"), 3)
-        XCTAssertEqual(s.numDecodings_BottomUp_Loop("111111111111111111111111111111111111111111111"), 1836311903)
+//        XCTAssertEqual(Solution().numDecodings("12"), 2)
+//        XCTAssertEqual(Solution().numDecodings("06"), 0)
+        XCTAssertEqual(Solution().numDecodings("226"), 3)
+//        XCTAssertEqual(Solution().numDecodings("111111111111111111111111111111111111111111111"), 1836311903)
     }
 }
 

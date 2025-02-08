@@ -34,27 +34,52 @@
 import XCTest
 
 class Solution {
+    
     func climbStairs(_ n: Int) -> Int {
         
+        var memo = [Int: Int]()
         func dfs(_ n: Int) -> Int {
-            if n <= 0 { return 0 }
-            if n == 1 { return 1 }
-            return dfs(n - 1) + dfs(n - 2)
-            
-            guard n >= 0 else { return 0 }
-            if n == 0 || n == 1 { return 1 }
-            return dfs(n - 1) + dfs(n - 2)
+            if let value = memo[n] { return value }
+            guard n > 2 else { return n }
+            let sum = dfs(n - 1) + dfs(n - 2)
+            memo[n] = sum
+            return memo[n]!
+        }
+        return dfs(n)
+    }
+    
+    func climbStairs1(_ n: Int) -> Int {
+        
+        var memo = [Int: Int]()
+       for i in 0...n {
+           guard i > 2 else {
+               memo[i] = i
+               continue
+           }
+           memo[i] = memo[i - 1]! + memo[i - 2]!
+        }
+        return memo[n]!
+    }
+    
+    func climbStairs2(_ n: Int) -> Int {
+        guard n > 1 else { return n }
+        var prev = 1
+        var curr = 1
+        for i in 2...n {
+            let next = prev + curr
+            prev = curr
+            curr = next
         }
         
-        return dfs(n)
+        return curr
     }
 }
 
 class SolutionTests: XCTestCase {
     func testExample() {
         let solution = Solution()
-        XCTAssertEqual(solution.climbStairs(2), 2)
-        XCTAssertEqual(solution.climbStairs(3), 3)
+        XCTAssertEqual(solution.climbStairs2(2), 2)
+        XCTAssertEqual(solution.climbStairs2(3), 3)
     }
 }
 
