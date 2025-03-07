@@ -22,26 +22,37 @@
  Explanation: You don't need to remove any of the intervals since they're already non-overlapping.
  */
 
-func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
-    let intervals = intervals.sorted { $0[0] < $1[0] }
-    var result = 0
-    var prevEnd = intervals[0][1]
-    for i in 1..<intervals.count {
-        let start = intervals[i][0]
-        let end = intervals[i][1]
-        if start >= prevEnd {
-            /* NotOverlapping */
-            prevEnd = end
-        } else {
-            /* Overlapping */
-            result += 1
-            prevEnd = min(prevEnd, end)
-            
+import XCTest
+
+class Solution {
+    
+    func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
+        let intervals = intervals.sorted { $0[0] < $1[0] }
+        var result = 0
+        var prevEnd = intervals[0][1]
+        for i in 1..<intervals.count {
+            let start = intervals[i][0]
+            let end = intervals[i][1]
+            if start >= prevEnd {
+                /* NotOverlapping */
+                prevEnd = end
+            } else {
+                /* Overlapping */
+                result += 1
+                prevEnd = min(prevEnd, end)
+                
+            }
         }
+        return result
     }
-    return result
 }
 
-//let intervals = [[1,2],[2,3],[3,4],[1,3]]
-let intervals = [[1,2],[1,2],[1,2]]
-print(eraseOverlapIntervals(intervals))
+class SolutionTests: XCTestCase {
+    func testSolution() {
+        XCTAssertEqual(Solution().eraseOverlapIntervals([[1,2],[2,3],[3,4],[1,3]]), 1)
+        XCTAssertEqual(Solution().eraseOverlapIntervals([[1,2],[1,2],[1,2]]), 2)
+        XCTAssertEqual(Solution().eraseOverlapIntervals([[1,2],[2,3]]), 0)
+    }
+}
+
+SolutionTests.defaultTestSuite.run()

@@ -20,31 +20,37 @@
 
  */
 
-func insert(_ intervals: [[Int]], _ newInterval: [Int]) -> [[Int]] {
-    var result = [[Int]]()
-    var i = 0
-    while i < intervals.count && intervals[i][1] < newInterval[0] {
-        result.append(intervals[i])
-        i += 1
+import XCTest
+
+class Solution {
+    func insert(_ intervals: [[Int]], _ newInterval: [Int]) -> [[Int]] {
+        var result = [[Int]]()
+        var i = 0
+        while i < intervals.count && intervals[i][1] < newInterval[0] {
+            result.append(intervals[i])
+            i += 1
+        }
+        var newInterval = newInterval
+        while i < intervals.count && intervals[i][0] <= newInterval[1] {
+            newInterval[0] = min(intervals[i][0], newInterval[0])
+            newInterval[1] = max(intervals[i][1], newInterval[1])
+            i += 1
+        }
+        result.append(newInterval)
+        
+        while i < intervals.count {
+            result.append(intervals[i])
+            i += 1
+        }
+        return result
     }
-    var newInterval = newInterval
-    while i < intervals.count && intervals[i][0] <= newInterval[1] {
-        newInterval[0] = min(intervals[i][0], newInterval[0])
-        newInterval[1] = max(intervals[i][1], newInterval[1])
-        i += 1
-    }
-    result.append(newInterval)
-    
-    while i < intervals.count {
-        result.append(intervals[i])
-        i += 1
-    }
-    return result
 }
 
+class SolutionTests: XCTestCase {
+    func testCase() {
+        XCTAssertEqual(Solution().insert([[1,3], [6,9]], [2,5]), [[1,5], [6,9]])
+        XCTAssertEqual(Solution().insert([[1,2],[3,5],[6,7],[8,10],[12,16]], [4,8]), [[1,2],[3,10],[12,16]])
+    }
+}
 
-//let intervals = [[1,3],[6,9]]; let newInterval = [2,5]
-let intervals = [[1,2],[3,5],[12,16]]; let newInterval = [4,8]
-debugPrint("RESULT: ",
-insert(intervals, newInterval)
-)
+SolutionTests.defaultTestSuite.run()

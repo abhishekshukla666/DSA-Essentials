@@ -29,7 +29,9 @@
  */
 
 import XCTest
+
 class Solution {
+
     func convertToTitle(_ columnNumber: Int) -> String {
         let alphabets = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
         var result = ""
@@ -39,11 +41,12 @@ class Solution {
             if reminder > 0 {
                 result.append(alphabets[reminder - 1])
             } else {
-                result.append("Z")
                 num -= 26
+                result.append("Z")
             }
             num /= 26
         }
+        
         return String(result.reversed())
     }
 }

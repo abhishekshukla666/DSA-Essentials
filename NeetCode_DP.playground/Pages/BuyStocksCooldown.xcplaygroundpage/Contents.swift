@@ -32,40 +32,94 @@ import Foundation
 import XCTest
 
 class Solution {
-    func maxProfit(_ prices: [Int]) -> Int {
-        /// Buying: i + 1
-        /// Selling: i + 2, because have to cool down
-
-        var dp: [String: Int] = [:] /// key = (i, buying), value = prices[i]
-
-        func dfs(_ i: Int, _ buying: Bool) -> Int {
+    
+    func maxProfit1(_ prices: [Int]) -> Int {
+        var profit = 0
+        func dfs(_ i: Int, _ holding: Bool) -> Int {
             if i >= prices.count { return 0 }
-            
-            if let value = dp["\(i)\(buying)"] {
-                return value
-            }
-
-            let cooldown = dfs(i + 1, buying)
-            if buying {
-                let buy = dfs(i + 1, !buying) - prices[i]
-                dp["\(i)\(buying)"] = max(buy, cooldown)
+            if holding {
+                let sell = dfs(i + 2, !holding) + prices[i]
+                let cooldown = dfs(i + 1, holding)
+                profit = max(sell, cooldown)
             } else {
-                let sell = dfs(i + 2, !buying) + prices[i]
-                dp["\(i)\(buying)"] = max(sell, cooldown)
+                let buy = dfs(i + 1, !holding) - prices[i]
+                let cooldown = dfs(i + 1, holding)
+                profit = max(buy, cooldown)
             }
             
-            return dp["\(i)\(buying)"]!
+            return profit
         }
+        return dfs(0, false)
+    }
+    
+    func maxProfit2(_ prices: [Int]) -> Int {
+        var memo = [String: Int]() /// key = "\(i)\(holding)", value = prices[i]
+        func dfs(_ i: Int, _ holding: Bool) -> Int {
+            if i >= prices.count { return 0 }
+            if let value = memo["\(i)\(holding)"] { return value }
+            if holding {
+                let sell = dfs(i + 2, !holding) + prices[i]
+                let cooldown = dfs(i + 1, holding)
+                memo["\(i)\(holding)"] = max(sell, cooldown)
+            } else {
+                let buy = dfs(i + 1, !holding) - prices[i]
+                let cooldown = dfs(i + 1, holding)
+                memo["\(i)\(holding)"] = max(buy, cooldown)
+            }
+            
+            return memo["\(i)\(holding)", default: 0]
+        }
+        return dfs(0, false)
+    }
+    
+    func maxProfit3(_ prices: [Int]) -> Int {
 
-        return dfs(0, true)
-
+        var memo = Array(repeating: Array(repeating: -1, count: 2), count: prices.count)
+        
+        func dfs(_ index: Int, _ holding: Int) -> Int {
+            if index >= prices.count { return 0 }
+            if memo[index][holding] != -1 {
+                return memo[index][holding]
+            }
+            var profit = 0
+            if holding == 1 {
+                let sell = dfs(index + 2, 0) + prices[index]
+                let cooldown = dfs(index + 1, 1)
+                profit = max(sell, cooldown)
+            } else {
+                let buy = dfs(index + 1, 1) - prices[index]
+                let cooldown = dfs(index + 1, 0)
+                profit = max(buy, cooldown)
+            }
+            memo[index][holding] = profit
+            print(memo)
+            return memo[index][holding]
+        }
+        
+        return dfs(0, 0)
+    }
+    
+    func maxProfit4(_ prices: [Int]) -> Int {
+        var coolDown = 0
+        var hold = Int.min
+        var sold = Int.min
+        for price in prices {
+            let prevSold = sold
+            sold = hold + price
+            hold = max(hold, coolDown - price)
+            coolDown = max(coolDown, prevSold)
+        }
+        
+        return max(coolDown, sold)
     }
 }
 
 class SolutionTests: XCTestCase {
     func testExample() {
         let solution = Solution()
-        XCTAssertEqual(solution.maxProfit([1, 2, 3, 0, 2]), 3)
+        XCTAssertEqual(solution.maxProfit4([1, 2, 3, 0, 2]), 3)
+        XCTAssertEqual(solution.maxProfit4([7, 1, 5, 3, 4, 6]), 6)
+        XCTAssertEqual(Solution().maxProfit4([1, 2]), 1)
     }
 }
 
