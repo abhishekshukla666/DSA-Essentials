@@ -1,19 +1,25 @@
 
-func sort<T: Comparable>(_ arr: inout [T], isOrdered: (T, T) -> Bool) -> [T] {
+//var arr = [4, 5, 3, 2, 1]
+/*
+ [4,5,3,2,1]
+ [4,3,5,2,1]
+ [3,4,5,2,1]
+ */
+
+
+func sort<T: Comparable>(_ arr: inout [T], _ isOrdered: (T, T) -> Bool) {
     for i in 1..<arr.count {
-        let value = arr[i]
-        var hole = i
-        while hole > 0 && isOrdered(arr[hole-1], value) {
-            arr.swapAt(hole, hole-1)
-            hole -= 1
+        var j = i
+        while j > 0 && isOrdered(arr[j], arr[j-1]) {
+            arr.swapAt(j, j-1)
+            j -= 1
         }
-        arr[hole] = value
     }
-    return arr
 }
+
 var arr = [9,2,6,3,7,5,4,1,8]
 //var arr = ["z","a","c","b","x","y"]
-sort(&arr, isOrdered: <)
+sort(&arr, >)
 print(arr)
 
 

@@ -1,4 +1,4 @@
-print("helli")
+
 
 func fourSum(_ nums: [Int], _ target: Int) -> [[Int]] {
     var result = [[Int]]()

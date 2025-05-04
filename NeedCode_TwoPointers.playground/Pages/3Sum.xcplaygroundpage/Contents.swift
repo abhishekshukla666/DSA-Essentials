@@ -31,46 +31,6 @@
 
 import XCTest
 
-/* Brute Force */
-class Solution {
-    func threeSum(_ nums: [Int]) -> [[Int]] {
-
-        let nums = nums.sorted()
-        guard nums.count >= 3 else { return [[]] }
-
-        var result = [[Int]]()
-        var i = 0
-
-        while i < nums.count {
-            var j = i + 1
-            while j < nums.count {
-                var k = j + 1
-                while k < nums.count {
-                    if nums[i] + nums[j] + nums[k] == 0 {
-                        result.append([nums[i], nums[j], nums[k]])
-                    }
-                    k += 1
-                    while k < nums.count, nums[k] == nums[k - 1] {
-                        k += 1
-                    }
-                    
-                }
-                j += 1
-                while j < nums.count, nums[j] == nums[j - 1] {
-                    j += 1
-                }
-            }
-            i += 1
-            while i < nums.count, nums[i] == nums[i - 1] {
-                i += 1
-            }
-        }
-
-        return result
-    }
-}
-
-/* Better */
 class Solution {
     func threeSum(_ nums: [Int]) -> [[Int]] {
         // [-1,0,1,2,-1,-4] ---(sorted)---> [-4, -1, -1, 0, 1, 2]

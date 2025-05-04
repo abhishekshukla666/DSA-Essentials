@@ -62,7 +62,7 @@ class Solution {
             /// [2,3,4,5,1] -> Search right portion
             let mid = left + (right - left) / 2
             minNum = min(minNum, nums[mid])
-            if nums[mid] >= nums[left] {
+            if nums[left] <= nums[mid] {
                 /// search in right sorted portion for min
                 left = mid + 1
             } else {

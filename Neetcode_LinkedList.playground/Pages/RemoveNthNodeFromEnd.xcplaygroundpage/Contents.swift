@@ -20,9 +20,18 @@
 public class ListNode {
     public var val: Int
     public var next: ListNode?
-    public init() { self.val = 0; self.next = nil; }
-    public init(_ val: Int) { self.val = val; self.next = nil; }
-    public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+    public init() {
+        self.val = 0
+        self.next = nil
+    }
+    public init(_ val: Int) {
+        self.val = val
+        self.next = nil
+    }
+    public init(_ val: Int, _ next: ListNode?) {
+        self.val = val
+        self.next = next
+    }
 }
 
 class Solution {
@@ -56,12 +65,39 @@ class Solution {
         return head
     }
     
+    func remvoeNthFromEnd2(_ head: ListNode?, _ n: Int) -> ListNode? {
+        var p1 = head
+        var count = 0
+        while p1 != nil {
+            count += 1
+            p1 = p1?.next
+        }
+        
+        if count == n {
+            return head?.next
+        }
+        
+        var prev: ListNode? = nil
+        var current = head
+        
+        for _ in 0..<(count-n) {
+            prev = current
+            current = current?.next
+        }
+        
+        prev?.next = current?.next
+        current?.next = nil
+    
+        return head
+    }
+    
     func printLL(_ root: ListNode?) {
         var curr = root
         while curr != nil {
-            print(curr?.val ?? -1)
+            print(curr?.val ?? -1, terminator: "->")
             curr = curr?.next
         }
+        print("\n")
     }
 }
 
@@ -78,6 +114,10 @@ three.next = four
 four.next = five
 
 let solution = Solution()
-//solution.printLL(one)
+solution.printLL(one)
 
-solution.removeNthFromEnd(one, 2)
+//solution.removeNthFromEnd(one, 2)
+solution.remvoeNthFromEnd2(one, 2)
+solution.printLL(one)
+
+
