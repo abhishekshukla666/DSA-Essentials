@@ -58,6 +58,7 @@ func isPrime(_ n: Int) -> Bool {
     if n < 2 { return false }
     var i = 2
     while i*i <= n {
+        print(i)
         if n % i == 0 {
             return false
         }
@@ -69,4 +70,13 @@ func isPrime(_ n: Int) -> Bool {
 
 countPrime(20)
 
+/*
+num = 20
+ 
+ i = 2
+ 2*2 <= 20 {
+ 20 % i == 0 { false }
+ i + 1
+ 
+ */
 

@@ -68,13 +68,44 @@ class Solution {
         backtrack(0, 0, &combination)
         return result
     }
+    
+    func combinationSum2(_ candidates: [Int], _ target: Int) -> [[Int]] {
+        var result: [[Int]] = .init()
+        var combinations: [Int] = .init()
+        
+        func dfs(_ index: Int, _ currSum: Int) {
+            if currSum == target {
+                result.append(combinations)
+                return
+            }
+            
+            if currSum > target || index >= candidates.count {
+                return
+            }
+            
+            combinations.append(candidates[index])
+            dfs(index, currSum + candidates[index])
+            
+            combinations.removeLast()
+            dfs(index + 1, currSum)
+        }
+        
+        dfs(0, 0)
+        return result
+    }
 }
 
 class SolutionTests: XCTestCase {
-    func testExample() {
-        XCTAssertEqual(Solution().combinationSum([2, 3, 6, 7], 7), [[2, 2, 3], [7]])
-        XCTAssertEqual(Solution().combinationSum([2, 3, 5], 8), [[2, 2, 2, 2], [2, 3, 3], [3, 5]])
-        XCTAssertEqual(Solution().combinationSum([2], 1), [])
+//    func testExample() {
+//        XCTAssertEqual(Solution().combinationSum([2, 3, 6, 7], 7), [[2, 2, 3], [7]])
+//        XCTAssertEqual(Solution().combinationSum([2, 3, 5], 8), [[2, 2, 2, 2], [2, 3, 3], [3, 5]])
+//        XCTAssertEqual(Solution().combinationSum([2], 1), [])
+//    }
+    
+    func testExample2() {
+        XCTAssertEqual(Solution().combinationSum2([2, 3, 6, 7], 7), [[2, 2, 3], [7]])
+//        XCTAssertEqual(Solution().combinationSum2([2, 3, 5], 8), [[2, 2, 2, 2], [2, 3, 3], [3, 5]])
+//        XCTAssertEqual(Solution().combinationSum2([2], 1), [])
     }
 }
 

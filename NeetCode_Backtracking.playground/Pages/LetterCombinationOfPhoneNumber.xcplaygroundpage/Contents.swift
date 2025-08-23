@@ -69,11 +69,37 @@ class Solution {
         print("result: \(result)")
         return result
     }
+    
+    func letterCombinations2(_ digits: String) -> [String] {
+        let digits = Array(digits)
+        
+        var combinations: [String] = .init()
+        
+        
+        func backtrack(_ index: Int, _ currLetter: String) {
+            guard index < digits.count else {
+                combinations.append(currLetter)
+                return
+            }
+            
+            for ch in phoneMap[digits[index]] ?? "" {
+                backtrack(index + 1, currLetter + String(ch))
+            }
+        }
+        backtrack(0, "")
+        return combinations
+    }
 }
 
 class SolutionTests: XCTestCase {
-    func testExample() {
-        XCTAssertEqual(Solution().letterCombinations("23"), ["ad","ae","af","bd","be","bf","cd","ce","cf"])
+//    func testExample() {
+//        XCTAssertEqual(Solution().letterCombinations("23"), ["ad","ae","af","bd","be","bf","cd","ce","cf"])
+//        XCTAssertEqual(Solution().letterCombinations(""), [])
+//        XCTAssertEqual(Solution().letterCombinations("2"), ["a","b","c"])
+//    }
+    
+    func testExample2() {
+        XCTAssertEqual(Solution().letterCombinations2("23"), ["ad","ae","af","bd","be","bf","cd","ce","cf"])
 //        XCTAssertEqual(Solution().letterCombinations(""), [])
 //        XCTAssertEqual(Solution().letterCombinations("2"), ["a","b","c"])
     }

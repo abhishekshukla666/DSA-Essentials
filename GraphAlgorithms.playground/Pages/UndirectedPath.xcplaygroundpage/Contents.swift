@@ -29,6 +29,7 @@ func undirectedPath_DFS(_ edges: [[String]], _ source: String, _ destination: St
     var set = Set<String>()
     return hasPath(graph, source, destination, &set)
 }
+
 func hasPath(_ graph: [String: [String]], _ source: String, _ destination: String, _ set: inout Set<String>) -> Bool {
     if source == destination { return true }
     if set.contains(source) { return false }

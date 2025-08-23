@@ -13,13 +13,31 @@ public class TreeNode {
 
 class BSTree {
     
-    var index = -1
-    func convertArrayToBST(_ arr: [Int]) -> TreeNode? {
-        index += 1
-        if arr[index] == -1 { return nil }
-        let root = TreeNode(arr[index])
-        root.left = convertArrayToBST(arr)
-        root.right = convertArrayToBST(arr)
+    func buildCompleteBinaryTree(_ arr: [Int?]) -> TreeNode? {
+        guard !arr.isEmpty, let first = arr[0] else { return nil }
+        
+        var nodes = arr.map { $0 != nil ? TreeNode($0!) : nil }
+        
+        for i in 0..<arr.count {
+            guard let node = nodes[i] else { continue }
+            
+            let leftIndex = 2 * i + 1
+            let rightIndex = 2 * i + 2
+            
+            if leftIndex < arr.count { node.left = nodes[leftIndex] }
+            if rightIndex < arr.count { node.right = nodes[rightIndex] }
+        }
+        
+        return nodes[0]
+    }
+    
+    func convertSortedArrayToBST(_ arr: [Int], _ left: Int, _ right: Int) -> TreeNode? {
+        guard left < right else { return nil }
+        let mid = left + (right - left) / 2
+        let root = TreeNode(arr[mid])
+        root.left = convertSortedArrayToBST(arr, left, mid - 1)
+        root.right = convertSortedArrayToBST(arr, mid + 1, right)
+        
         return root
     }
     
@@ -100,18 +118,36 @@ class BSTree {
         
         return isSubtree(s.left, t) || isSubtree(s.right, t)
     }
+    
+    func printLevelOrder(_ root: TreeNode?) {
+        guard let root else { return }
+        var queue: [TreeNode?] = [root]
+        while !queue.isEmpty {
+            let first = queue.removeFirst()
+            print(first?.val ?? "nil")
+            
+            if let left = first?.left {
+                queue.append(left)
+            }
+            if let right = first?.right {
+                queue.append(right)
+            }
+            
+        }
+    }
 }
-var arr = [1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1]
-let root = BSTree().convertArrayToBST(arr)
+var arr = [3,9,20,nil,nil,15,7]
+let root = BSTree().buildCompleteBinaryTree(arr)
+BSTree().printLevelOrder(root)
 /*
         1
     2       3
  4      5       6
  
  */
-BSTree.printPreOrder(root)
-print("\n")
-BSTree.printInOrder(root)
-print("\n")
-BSTree.printPostOrder(root)
-BSTree.diameterOfBinaryTree(root)
+//BSTree.printPreOrder(root)
+//print("\n")
+//BSTree.printInOrder(root)
+//print("\n")
+//BSTree.printPostOrder(root)
+//BSTree.diameterOfBinaryTree(root)
