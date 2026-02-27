@@ -56,7 +56,30 @@
 import XCTest
 
 class Solution {
+    func hammingWeight_1(_ n: Int) -> Int {
+        var n = n
+        var weight = 0
+        for i in 0..<32 {
+            if n & 1 == 1 {
+                weight += 1
+            }
+            n >>= 1
+        }
+        
+        return weight
+    }
+    
     func hammingWeight(_ n: Int) -> Int {
+        var n = n
+        var weight = 0
+        while n != 0 {
+            n = n & (n - 1)
+            weight += 1
+        }
+        return weight
+    }
+    
+    func hammingWeight_2(_ n: Int) -> Int {
         var n = n
         var res = 0
         while n != 0 {

@@ -18,3 +18,24 @@ func removeDuplicates(_ arr: [Int]) -> [Int] {
 }
 
 print(removeDuplicates(arr))
+
+/*
+ Remove duplicates and preserve the order
+ */
+
+let array: [Int] = [1, 2, 2, 3, 1, 4]
+
+func removeDuplicatesPreservingOrder(_ array: [Int]) -> [Int] {
+    var seen: Set<Int> = []
+    var result: [Int] = []
+    
+    for num in array {
+        if seen.contains(num) { continue }
+        seen.insert(num)
+        result.append(num)
+    }
+    
+    return result
+}
+
+print("Remove duplicates and preserve order: " , removeDuplicatesPreservingOrder(array))

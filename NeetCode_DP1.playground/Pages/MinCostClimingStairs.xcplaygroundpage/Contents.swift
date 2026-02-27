@@ -43,6 +43,7 @@
 import XCTest
 
 class Solution {
+    /* Recursive + Memoization */
     func minCostClimbingStairs(_ cost: [Int]) -> Int {
         
         var memo: [Int] = Array(repeating: -1, count: cost.count + 1)
@@ -58,6 +59,7 @@ class Solution {
         return min(dfs(0), dfs(1))
     }
     
+    /* Top Down */
     func minCostClimbingStairs2(_ cost: [Int]) -> Int {
         var dp = Array(repeating: 0, count: cost.count + 1)
         
@@ -69,6 +71,7 @@ class Solution {
         return dp[cost.count]
     }
     
+    /* Space Optimization */
     func minCostClimbingStairs3(_ cost: [Int]) -> Int {
         var prev1 = 0
         var prev2 = 0

@@ -16,6 +16,31 @@
  Output: 2
  
  */
+
+func subarraySum_BF(_ nums: [Int], _ k: Int) -> Int {
+    var count = 0
+    
+    var cumulativeSum = Array(repeating: 0, count: nums.count + 1)
+    cumulativeSum[0] = 0
+    
+    for index in stride(from: 1, through: nums.count, by : 1) {
+        cumulativeSum[index] = cumulativeSum[index - 1] + nums[index - 1]
+    }
+    print(cumulativeSum)
+    
+    for start in 0..<nums.count {
+        for end in start + 1...nums.count {
+            if cumulativeSum[end] - cumulativeSum[start] == k {
+                count += 1
+            }
+        }
+    }
+    
+    return count
+}
+
+subarraySum_BF([-1,4,1,2,3,-6], 3)
+
 func subarraySum(_ nums: [Int], _ k: Int) -> Int {
     var map = [0:1]
     var currSum = 0

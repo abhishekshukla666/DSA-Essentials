@@ -34,10 +34,11 @@ import XCTest
 class Solution {
     func addBinary(_ a: String, _ b: String) -> String {
         /*
-          011
-        + 001
+           1
+          1010
+        + 1011
          -----
-          010
+         10101
          -----
          */
         

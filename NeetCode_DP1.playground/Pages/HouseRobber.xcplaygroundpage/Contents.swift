@@ -35,7 +35,7 @@ import XCTest
 class Solution {
     func rob(_ nums: [Int]) -> Int {
         
-        var memo: [Int] = Array(repeating: -1, count: nums.count + 1)
+        var memo: [Int] = Array(repeating: -1, count: nums.count)
         func dfs(_ i: Int) -> Int {
             if i >= nums.count {
                 return 0
@@ -48,7 +48,8 @@ class Solution {
             memo[i] = max(skip, keep)
             return memo[i]
         }
-        
+        let value = dfs(0)
+        print(memo)
         return dfs(0)
     }
     
@@ -102,4 +103,6 @@ class SolutionTests: XCTestCase {
     }
 }
 
-SolutionTests.defaultTestSuite.run()
+//SolutionTests.defaultTestSuite.run()
+
+print(Solution().rob([1,2,3,1]))

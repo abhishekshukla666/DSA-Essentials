@@ -33,37 +33,33 @@
 import XCTest
 
 class Solution {
-    func threeSum(_ arrs: [Int]) -> [[Int]] {
-        
-        let nums = arrs.sorted()
-        var i = 0
-        
+    func threeSum(_ arr: [Int]) -> [[Int]] {
+        let arr = arr.sorted()
         var result = [[Int]]()
-        while i < nums.count {
-            while i < nums.count && i > 0 && nums[i] == nums[i-1] {
+        var i = 0
+        while i < arr.count {
+            while i < arr.count && i > 0 && arr[i] == arr[i - 1] {
                 i += 1
                 continue
             }
             
             var j = i + 1
-            var k = nums.count - 1
-            
+            var k = arr.count - 1
             while j < k {
-                let sum = nums[i] + nums[j] + nums[k]
+                let sum = arr[i] + arr[j] + arr[k]
                 if sum < 0 {
                     j += 1
-                } else if sum == 0 {
-                    result.append([nums[i], nums[j], nums[k]])
+                } else if sum > 0 {
+                    k -= 1
+                } else {
+                    result.append([arr[i], arr[j], arr[k]])
                     j += 1
-                    while j < k && nums[j] == nums[j-1] {
+                    while j < k && arr[j] == arr[j - 1] {
                         j += 1
                         continue
                     }
-                } else if sum > 0 {
-                    k -= 1
                 }
             }
-            
             i += 1
         }
         return result
