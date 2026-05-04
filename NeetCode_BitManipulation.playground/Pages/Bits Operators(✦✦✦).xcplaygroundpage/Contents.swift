@@ -20,31 +20,12 @@
  10000 = 16
  */
 
-var num = 14
-num >>= 3
-print(num)
-
-
-print(num & 1)
-print(num >> 1)
-num >>= 1
-
-print("--------")
-print(num & 1)
-print(num >> 1)
-num >>= 1
-
-print("--------")
-print(num & 1)
-print(num >> 1)
-num >>= 1
-
-print("--------")
-print(num & 1)
-print(num >> 1)
-num >>= 1
+var num = 11
+print(num >> 1) // right shift
+print(num << 1) // left shift  
 
 // & Operator
+print("Curr Num: \(num)")
 print("AND Results")
 print(num & 1)
 /*

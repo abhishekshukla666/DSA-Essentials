@@ -66,9 +66,9 @@ class Solution {
             let carry = a & b
             debugPrint("carry: \(carry)")
             a = a ^ b
-            debugPrint("a: \(a)")
+            debugPrint("a after XOR: \(a)")
             b = carry << 1
-            debugPrint("b: \(b)\n")
+            debugPrint("b after left shift by 1: \(b)\n")
         }
 
         return a

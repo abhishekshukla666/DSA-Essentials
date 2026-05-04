@@ -43,8 +43,8 @@ class Solution {
          */
         
         var result: [String] = .init()
-        let a = a.compactMap(\.wholeNumberValue)
-        let b = b.compactMap(\.wholeNumberValue)
+        let a = a.compactMap(\.wholeNumberValue) // [1,0,1,0]
+        let b = b.compactMap(\.wholeNumberValue) // [1,0,1,1]
         
         var carry: Int = 0
         var i = a.count - 1
@@ -54,10 +54,10 @@ class Solution {
             let firstDigit = i >= 0 ? a[i]: 0
             let secondDigit = j >= 0 ? b[j]: 0
             
-            let sum = firstDigit + secondDigit + carry
+            let sum = firstDigit + secondDigit + carry // 0 + 1 + 0
             
-            carry = sum / 2
-            let digit = sum % 2
+            carry = sum / 2 // 1/2 = 0
+            let digit = sum % 2 // = 0
             
             result.append(String(digit))
             
@@ -65,6 +65,7 @@ class Solution {
             j -= 1
         }
         
+        print("Current Result: \(result.joined())")
         return result.reversed().joined()
     }
 }
