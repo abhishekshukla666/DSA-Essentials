@@ -25,7 +25,7 @@
 import XCTest
 
 class Solution {
-    func isAnagram(_ s: String, _ t: String) -> Bool {
+    func isAnagram1(_ s: String, _ t: String) -> Bool {
         
         let charA = Character("a").asciiValue!
         
@@ -41,6 +41,24 @@ class Solution {
         }
         
         return sChar == tChar
+    }
+    
+    func isAnagram(_ s: String, _ t: String) -> Bool {
+        guard s.count == t.count else { return false }
+        var codes = Array(repeating: 0, count: 26)
+        for ch in s {
+            codes[Int(ch.asciiValue! - Character("a").asciiValue!)] += 1
+        }
+        
+        print(codes)
+        
+        for ch in t {
+            let index = Int(ch.asciiValue! - Character("a").asciiValue!)
+            guard codes[index] > 0 else { return false }
+            codes[index] -= 1
+        }
+        
+        return true
     }
 }
 

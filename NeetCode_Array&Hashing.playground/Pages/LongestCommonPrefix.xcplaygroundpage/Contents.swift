@@ -20,9 +20,22 @@ func longestCommonPrefix(_ strs: [String]) -> String {
     return res
 }
 
-//let strs = ["flower","flow","flight"]
-let strs = [""]
+func longestCommonPrefix2(_ strs: [String]) -> String {
+    let strs = strs.sorted()
+    guard let first = strs.first, let last = strs.last else { return "" }
+    
+    var index = 0
+    while index < first.count && index < last.count && first.charAt(index) == last.charAt(index) {
+            index += 1
+    }
+    return String(first.prefix(index))
+}
+
+let strs = ["flower","flow","flight"]
+//let strs = [""]
+//let strs = ["ab", "a"]
 //let strs = ["a"]
-longestCommonPrefix(strs)
+//longestCommonPrefix(strs)
+longestCommonPrefix2(strs)
 
 
